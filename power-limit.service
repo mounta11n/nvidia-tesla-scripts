@@ -1,0 +1,13 @@
+[Unit]
+Description=Power Limit Script for NVIDIA GPUs
+After=multi-user.target nvidia-persistenced.service
+Wants=nvidia-persistenced.service
+
+[Service]
+ExecStart=/PATH/TO/YOUR/POWER-LIMIT.SH
+Restart=always
+RestartSec=60
+User=root
+
+[Install]
+WantedBy=multi-user.target
