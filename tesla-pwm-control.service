@@ -1,0 +1,11 @@
+[Unit]  
+Description=Fan Control Script
+
+[Service]
+ExecStart=/PATH/TO/YOUR/SCRIPT.SH
+Restart=always
+RestartSec=5
+User=root
+
+[Install]
+WantedBy=multi-user.target
