@@ -57,12 +57,25 @@ check_pwm_enable() {
     done
 }
 
-# simple logging function
+# logging function
+log_status() {
+    local temp=$1
+    local speed=$2
+    speed_current=$(cat /sys/class/hwmon/hwmon5/pwm7)
+    local timestamp=$(date '+%Y-%m-%d %H:%M:%S')
+    echo "Change-Log" >> $LOGFILE
+    echo "$timestamp - Temp: $temp°C, PWM-Target: $speed, PWM-Current: $speed_current" >> $LOGFILE
+    echo " " >> $LOGFILE
+    echo "---------" >> $LOGFILE
+    echo " " >> $LOGFILE
+}
+
+# simpler logging. uncomment the log_status line if you additionally need the above larger and more 'fancy' logging function
 log_if_changed() {
     local temp=$1
     local speed=$2
     if [ $temp -ne $last_temp ] || [ $speed -ne $last_speed ]; then
-        log_status $temp $speed
+        #log_status $temp $speed
         last_temp=$temp
         last_speed=$speed
     fi
